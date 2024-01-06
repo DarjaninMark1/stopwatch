@@ -1,0 +1,20 @@
+<ng-container *ngFor="let componentData of componentDataList; let i = index">
+    <p-toolbar  [style]="{ 'background-color': componentData.color,  'color': 'black',}">
+        <div class="p-toolbar-group-start">
+            <!-- <button pButton icon="pi pi-plus" class="mr-2">Settings</button> -->
+        </div>
+        <div class="p-toolbar-group-center">
+            <ng-container *ngIf="componentData.type === 'timer'; else stopwatch">
+                <app-timer [name]="componentData.name!" [id]="componentData.id" [durationInSeconds]="componentData.durationInSeconds!" (timerCompleted)="onTimerCompleted()"></app-timer>
+              </ng-container>
+              <ng-template #stopwatch>
+                <app-stopwatch [name]="componentData.name!" [id]="componentData.id" [durationInSeconds]="componentData.durationInSeconds!" ></app-stopwatch>
+              </ng-template>
+        </div>
+        <div class="p-toolbar-group-end">
+            <button pButton class="mr-2" (click)="startStopComponent(i, componentData.id)" >{{startStop(i)}}</button>
+        </div>
+    </p-toolbar>
+</ng-container>
+
+  
